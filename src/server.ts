@@ -2,6 +2,7 @@
 import { Server } from "http"
 import app from "./app";
 import mongoose from "mongoose";
+import { envVars } from "./app/config/env";
 
 
 let server: Server;
@@ -11,19 +12,21 @@ let server: Server;
 
 const main = async () => {
 
+  
+   try {
 
-    try {
+      //  await mongoose.connect('mongodb+srv://majharul2022:majharul2022@cluster0.5g7cb.mongodb.net/PH_Tour_Backend?retryWrites=true&w=majority&appName=Cluster0');
+      await mongoose.connect(envVars.DB_URL)
 
-          await mongoose.connect('mongodb+srv://majharul2022:majharul2022@cluster0.5g7cb.mongodb.net/PH_Tour_Backend?retryWrites=true&w=majority&appName=Cluster0');
+     
 
-           
 
-        server = app.listen(5000, () => {
-            console.log("listen to port ", 5000);
-        })
-    } catch (error) {
-        console.log(error);
-    }
+      server = app.listen(envVars.PORT, () => {
+         console.log(`listen to port ${envVars.PORT} `);
+      })
+   } catch (error) {
+      console.log(error);
+   }
 
 
 
@@ -31,57 +34,57 @@ const main = async () => {
 
 main();
 
-process.on('SIGTERM',()=>{
+process.on('SIGTERM', () => {
 
-      console.log("SIGTERM rejecktion detected... server shutdown");
+   console.log("SIGTERM rejecktion detected... server shutdown");
 
-      if(server){
-         server.close(()=>{
-            process.exit(1);
-         })
-      }
+   if (server) {
+      server.close(() => {
+         process.exit(1);
+      })
+   }
 
-      process.exit(1);
+   process.exit(1);
 })
 
-process.on('SIGINT',()=>{
+process.on('SIGINT', () => {
 
-      console.log("sigInt rejecktion detected... server shutdown");
+   console.log("sigInt rejecktion detected... server shutdown");
 
-      if(server){
-         server.close(()=>{
-            process.exit(1);
-         })
-      }
+   if (server) {
+      server.close(() => {
+         process.exit(1);
+      })
+   }
 
-      process.exit(1);
+   process.exit(1);
 })
 
 
-process.on('uncaughtException',()=>{
+process.on('uncaughtException', () => {
 
-      console.log("Unhandle rejecktion detected... server shutdown");
+   console.log("Unhandle rejecktion detected... server shutdown");
 
-      if(server){
-         server.close(()=>{
-            process.exit(1);
-         })
-      }
+   if (server) {
+      server.close(() => {
+         process.exit(1);
+      })
+   }
 
-      process.exit(1);
+   process.exit(1);
 })
 
-process.on('uncaughtException',()=>{
+process.on('uncaughtException', () => {
 
-      console.log("Unhandle uncaught exceptions... server shutdown");
+   console.log("Unhandle uncaught exceptions... server shutdown");
 
-      if(server){
-         server.close(()=>{
-            process.exit(1);
-         })
-      }
+   if (server) {
+      server.close(() => {
+         process.exit(1);
+      })
+   }
 
-      process.exit(1);
+   process.exit(1);
 })
 
 // Promise.reject(new Error("throw a error"));
