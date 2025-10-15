@@ -13,9 +13,9 @@ import { UserService } from "./user.service";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const createUser = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-
+     
     const user = await UserService.createUserService(req.body);
-
+  
     sendResponse(res, {
         success: true,
         statusCode: httpstatus.CREATED,
@@ -27,7 +27,7 @@ const createUser = catchAsync(async (req: Request, res: Response, next: NextFunc
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getAllUser = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-
+   
 
     const result = await UserService.getAllUserService();
 
