@@ -17,7 +17,7 @@ export enum IsActive{
 }
 
 export interface IAuthProvider{
-      provider:string,
+       provider: "google" | "credentials";
       providerId:string
 }
 
@@ -30,7 +30,7 @@ export interface IUser{
       address?:string,
       isDeleted?:string,
       isActive?:IsActive,
-      isVevified?:string,
+      isVerified?:string,
       role:Role,
       auths:IAuthProvider[],
       bookings?:Types.ObjectId[],

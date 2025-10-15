@@ -28,7 +28,7 @@ const userSchema = new Schema<IUser>({
           enum:Object.values(IsActive),
           default:IsActive.ACTIVE
        },
-       isVevified:{
+       isVerified:{
           type:Boolean,
           default:false
        },
