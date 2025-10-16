@@ -6,6 +6,10 @@ import AppError from "../../errorHelpers/AppError";
  
 import { IUser } from "../user/user.interface";
 import { User } from "../user/user.models";
+
+
+import { generateToken } from "../../utils/jwt";
+ 
  
 
 
@@ -24,10 +28,18 @@ const credentialsLogin = async (payload: Partial<IUser>) => {
         throw new AppError(httpStatus.BAD_REQUEST, "Incorrect Password")
     }
      
+    const jwtPayload = {
+        userId: isUserExist._id,
+        email: isUserExist.email,
+        role: isUserExist.role
+    }
+
     
+    
+    const accessToken = generateToken(jwtPayload,"secrete","1d");
  
     return {
-        email:isUserExist.email
+        accessToken
     }
 
 }

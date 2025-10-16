@@ -3,6 +3,7 @@ import { Server } from "http"
 import app from "./app";
 import mongoose from "mongoose";
 import { envVars } from "./app/config/env";
+import { seedSuperAdmin } from "./app/utils/superAdmin";
 
 
 let server: Server;
@@ -32,8 +33,10 @@ const main = async () => {
 
 }
 
-main();
-
+(async () => {
+    await main()
+    await seedSuperAdmin()
+})()
 process.on('SIGTERM', () => {
 
    console.log("SIGTERM rejecktion detected... server shutdown");
