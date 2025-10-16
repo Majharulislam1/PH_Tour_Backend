@@ -41,9 +41,15 @@ const getAllUserService = async () => {
 }
 
 
+const updateUser = async ()=>{
+     
+}
+
+
 
 
 export const UserService = {
     createUserService,
-    getAllUserService
+    getAllUserService,
+    updateUser
 }

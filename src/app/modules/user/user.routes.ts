@@ -16,6 +16,6 @@ export const User_Routes = Router()
 
 
 User_Routes.post("/register", validateRequest(createUserZodSchema), UserRouter.createUser);
-User_Routes.get('/', checkAuths('ADMIN'), UserRouter.getAllUser);
+User_Routes.get('/', checkAuths('ADMIN','SUPER_ADMIN'), UserRouter.getAllUser);
 
 
